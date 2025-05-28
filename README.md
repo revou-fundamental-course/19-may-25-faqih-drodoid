@@ -5,7 +5,7 @@ Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan
 ## Fitur
 - Konversi suhu dari Celsius ke Fahrenheit dan sebaliknya
 - Tampilan modern, responsif, dan mudah dipakai
-- Dark mode & light mode (otomatis tersimpan di browser)
+- Dark mode & light mode 
 - Validasi input & pesan error interaktif
 - Menampilkan langkah perhitungan secara detail
 - Reset & reverse mode dengan satu klik
