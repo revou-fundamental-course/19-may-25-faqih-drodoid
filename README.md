@@ -4,8 +4,7 @@ Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan
 
 ## Fitur
 - Konversi suhu dari Celsius ke Fahrenheit dan sebaliknya
-- Tampilan modern, responsif, dan mudah dipakai
-- Dark mode & light mode (otomatis tersimpan di browser)
+- Dark mode & light mode 
 - Validasi input & pesan error interaktif
 - Menampilkan langkah perhitungan secara detail
 - Reset & reverse mode dengan satu klik
@@ -17,8 +16,9 @@ Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan
 4. Gunakan tombol **Reset** untuk menghapus input/output.
 5. Klik icon 🌙/☀️ di kanan atas untuk mengganti tema dark/light.
 
-## Screenshot
-![Tampilan Kalkulator Suhu](screenshot.png)
+## Tampilan
+![Tampilan Kalkulator Suhu](https://github.com/user-attachments/assets/1cbb6d59-3f4c-4a21-a7e4-28e1277d752b)
+
 
 ## Author
 @Nur Faqih Muhandis
