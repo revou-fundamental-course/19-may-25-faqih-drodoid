@@ -298,13 +298,13 @@ body.dark-mode .mode-indicator {
   text-align: center;
   color: #888;
   margin-top: 30px;
-  font-size: 7px;
+  font-size: 11px;
   letter-spacing: 0.05em;
 }
 .wm {
   font-weight: bold;
   color: #303756;
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
 }
 body.dark-mode .app-footer {
   color: #bbb;
