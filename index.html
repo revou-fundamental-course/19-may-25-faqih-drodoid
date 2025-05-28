@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Suhu</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>Kalkulator Suhu</h1>
+        <p class="subtitle">Konversi suhu dengan mudah dan akurat</p>
+        <button
+          id="toggleThemeBtn"
+          class="btn-toggle-theme"
+          type="button"
+          aria-label="Ganti Dark/Light Mode"
+        >
+          <span id="themeIcon">🌙</span>
+        </button>
+      </header>
+
+      <section class="mode-indicator" id="modeIndicator">
+        Mode: Celsius ke Fahrenheit
+      </section>
+      <form onsubmit="convertTemperature(); return false;">
+        <div class="input-group">
+          <label for="inputTemp" id="inputLabel">Celsius (°C):</label>
+          <input
+            type="number"
+            id="inputTemp"
+            placeholder="Masukkan suhu..."
+            step="0.01"
+          />
+        </div>
+
+        <div class="button-group">
+          <button class="btn-convert" type="submit">Konversi</button>
+          <button class="btn-reset" type="button" onclick="resetCalculator()">
+            Reset
+          </button>
+          <button class="btn-reverse" type="button" onclick="reverseMode()">
+            Reverse
+          </button>
+        </div>
+
+        <div id="errorMessage" class="error-box"></div>
+      </form>
+
+      <section class="result-section">
+        <div class="input-group">
+          <label for="outputTemp" id="outputLabel">Fahrenheit (°F):</label>
+          <input type="number" id="outputTemp" readonly />
+        </div>
+      </section>
+
+      <article class="calculation-display" id="calculationDisplay">
+        <div class="calculation-title">Cara Kalkulasi:</div>
+        <div id="calculationSteps"></div>
+      </article>
+
+      <aside class="conversion-info">
+        <h3 id="conversionTitle">
+          Rumus Konversi Dari Celsius (°C) ke Fahrenheit (°F)
+        </h3>
+        <p id="conversionFormula">°F = (°C × 9/5) + 32</p>
+        <p id="conversionExample">Contoh: 0°C = (0 × 9/5) + 32 = 32°F</p>
+      </aside>
+
+      <footer class="app-footer">
+        <span class="wm">@Nur Faqih Muhandis</span>
+      </footer>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
