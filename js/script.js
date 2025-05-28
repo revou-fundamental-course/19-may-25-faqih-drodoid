@@ -1,9 +1,10 @@
 // Mode konversi: true = C to F, false = F to C
 let isCelsiusToFahrenheit = true;
 
-// Dark/Light mode toggle
+// Key untuk menyimpan tema di localStorage
 const themeKey = "suhu-theme";
 
+// Fungsi untuk menerapkan tema pada <body>
 function applyTheme(theme) {
   if (theme === "dark") {
     document.body.classList.add("dark-mode");
@@ -16,13 +17,13 @@ function applyTheme(theme) {
 function updateThemeIcon() {
   const icon = document.getElementById("themeIcon");
   if (document.body.classList.contains("dark-mode")) {
-    icon.textContent = "🌙"; // Icon light mode
+    icon.textContent = "🌙";
   } else {
-    icon.textContent = "☀️"; // Icon dark mode
+    icon.textContent = "☀️";
   }
 }
 
-// Fungsi untuk toggle tema
+// Toggle mode tema antara dark dan light
 function toggleTheme() {
   const isDark = document.body.classList.contains("dark-mode");
   if (isDark) {
@@ -35,6 +36,7 @@ function toggleTheme() {
   updateThemeIcon();
 }
 
+// Event listener untuk DOMContentLoaded
 document.addEventListener("DOMContentLoaded", function () {
   // Apply theme
   const savedTheme = localStorage.getItem(themeKey) || "light";
@@ -65,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function convertTemperature() {
   const inputValue = parseFloat(document.getElementById("inputTemp").value);
 
+  // Validasi input harus angka
   if (isNaN(inputValue)) {
     showError("Sebelum Klik Konversi Masukin Angka Dulu ya🙏😌");
     return;
@@ -100,7 +103,7 @@ function convertTemperature() {
             <div class="formula">°C = ${result.toFixed(2)}</div>
         `;
   }
-
+  // Tampilkan hasil konversi dan langkah perhitungan
   document.getElementById("outputTemp").value = result.toFixed(2);
   document.getElementById("calculationSteps").innerHTML = calculationSteps;
 }
@@ -112,6 +115,7 @@ function resetCalculator() {
     '<p style="color: #999; font-style: italic;">Masukkan nilai suhu dan klik "Konversi" untuk melihat perhitungan</p>';
 }
 
+//Membalik mode konversi antara Celsius ↔ Fahrenheit sekaligus mereset kalkulator dan update label, rumus, dan contoh.
 function reverseMode() {
   isCelsiusToFahrenheit = !isCelsiusToFahrenheit;
 
@@ -144,6 +148,7 @@ function reverseMode() {
   }
 }
 
+// Fungsi untuk menampilkan pesan error
 function showError(message) {
   const errorEl = document.getElementById("errorMessage");
   if (!errorEl) return alert(message); // fallback kalau HTML belum ada
@@ -157,7 +162,7 @@ function showError(message) {
     setTimeout(() => {
       errorEl.style.display = "none";
     }, 190); // tunggu animasi selesai
-  }, 1900);
+  }, 1900); // Error box tampil 1,9 detik
 
   // Biar smooth munculnya
   errorEl.style.display = "block";
