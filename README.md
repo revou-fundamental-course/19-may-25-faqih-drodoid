@@ -17,7 +17,7 @@ Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan
 4. Gunakan tombol **Reset** untuk menghapus input/output.
 5. Klik icon 🌙/☀️ di kanan atas untuk mengganti tema dark/light.
 
-## Screenshot
+## Tampilan
 ![Tampilan Kalkulator Suhu](https://github.com/revou-fundamental-course/19-may-25-faqih-drodoid/blob/main/Tampilan%20Kalkulator%20Suhu/Tampilan%20Kalkulator%20Suhu%20(dark).png)
 
 ## Author
