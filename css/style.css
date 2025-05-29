@@ -1,31 +1,206 @@
+/* Reset margin, padding, dan box-sizing ke border-box untuk seluruh elemen */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Gaya dasar untuk body */
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: #f0f2f5;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  transition: background 0.3s;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; /* Font utama */
+  background: #f0f2f5; /* Warna background terang */
+  min-height: 100vh; /* Tinggi minimal layar penuh */
+  transition: background 0.3s; /* Transisi saat ganti tema */
 }
 
+/* Pembungkus utama aplikasi, flex agar responsif */
+.app-wrapper {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Kontainer utama kalkulator suhu */
 .container {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  padding: 40px;
+  background: #fff; /* Latar belakang putih */
+  border-radius: 20px; /* Sudut membulat */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Shadow halus */
+  padding: 40px; /* Padding konten */
   max-width: 500px;
   width: 100%;
-  animation: slideUp 0.6s ease-out;
-  transition: background 0.3s, color 0.3s;
+  margin: 20px auto; /* Tengah secara horizontal */
+  animation: slideUp 0.6s ease-out; /* Animasi muncul dari bawah */
+  transition: background 0.3s, color 0.3s, margin-left 0.3s ease;
 }
 
+/* ===================== PANEL RIWAYAT (History Panel) ===================== */
+.history-panel {
+  position: fixed; /* Panel tetap di sisi kiri */
+  left: -320px; /* Sembunyi di kiri jika non-aktif */
+  top: 0;
+  width: 320px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+  border-right: 1px solid #e1e5e9;
+}
+
+/* Panel riwayat aktif, geser ke kanan */
+.history-panel.active {
+  left: 0;
+}
+
+/* Saat panel riwayat aktif, kontainer bergeser */
+.history-panel.active ~ .container {
+  margin-left: 340px;
+}
+
+/* Header panel riwayat */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #f0f2f5;
+  background: #667eea;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.history-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+/* Tombol hapus riwayat */
+.clear-history-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.2s;
+}
+.clear-history-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* List riwayat */
+.history-list {
+  padding: 15px;
+}
+
+/* Pesan saat belum ada riwayat */
+.no-history {
+  text-align: center;
+  color: #666;
+  padding: 40px 20px;
+}
+.no-history p {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.no-history small {
+  color: #999;
+}
+
+/* Item riwayat konversi */
+.history-item {
+  background: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.history-item:hover {
+  background: #e3f2fd;
+  border-color: #667eea;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Header pada tiap item riwayat */
+.history-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* Teks konversi utama di riwayat */
+.history-conversion {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95em;
+}
+
+/* Tanggal/waktu pada riwayat */
+.history-time {
+  font-size: 0.8em;
+  color: #666;
+}
+
+/* Detail pada riwayat */
+.history-details {
+  font-size: 0.85em;
+  color: #555;
+  line-height: 1.4;
+}
+
+/* Rumus/formula di item riwayat */
+.history-formula {
+  background: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 5px;
+  font-family: "Courier New", monospace;
+  font-size: 0.8em;
+  color: #667eea;
+  border-left: 3px solid #667eea;
+}
+
+/* ===================== TOGGLE HISTORY BUTTON ===================== */
+.toggle-history-btn {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+.toggle-history-btn:hover {
+  background: #5a6fd8;
+  transform: scale(1.1);
+}
+.toggle-history-btn.active {
+  left: 340px;
+  background: #ff6b6b;
+}
+.toggle-history-btn.active:hover {
+  background: #ff5252;
+}
+
+/* ===================== ANIMASI ===================== */
+/* Animasi untuk kontainer kalkulator saat muncul */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -35,6 +210,16 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ===================== HEADER & JUDUL ===================== */
+header {
+  display: flex;
+  align-items: flex-start; /* Tombol tema nempel atas */
+  justify-content: space-between;
+  gap: 1em;
+  margin-bottom: 1.5em;
+  position: relative;
 }
 
 h1 {
@@ -52,6 +237,7 @@ h1 {
   font-size: 1em;
 }
 
+/* ===================== FORM INPUT ===================== */
 .input-group {
   margin-bottom: 20px;
 }
@@ -64,6 +250,7 @@ label {
   font-size: 1.1em;
 }
 
+/* Input suhu dan hasil */
 input[type="number"] {
   width: 100%;
   padding: 15px;
@@ -73,7 +260,6 @@ input[type="number"] {
   transition: all 0.3s ease;
   background: #f8f9fa;
 }
-
 input[type="number"]:focus {
   outline: none;
   border-color: #667eea;
@@ -82,12 +268,14 @@ input[type="number"]:focus {
   transform: translateY(-2px);
 }
 
+/* ===================== TOMBOL AKSI ===================== */
 .button-group {
   display: flex;
   gap: 10px;
   margin: 25px 0;
 }
 
+/* Aturan umum tombol */
 button {
   flex: 1;
   padding: 15px;
@@ -101,24 +289,44 @@ button {
   letter-spacing: 0.5px;
 }
 
+/* Tombol Konversi */
 .btn-convert {
   background: #667eea;
   color: white;
 }
+.btn-convert:hover {
+  background: #5a6fd8;
+  transform: translateY(-2px);
+}
 
+/* Tombol Reset */
 .btn-reset {
   background: #ffeaa7;
   color: #333;
 }
-
-.btn-reverse {
-  background: #4f303b;
-  color: white;
+.btn-reset:hover {
+  background: #fdcb6e;
+  transform: translateY(-2px);
 }
 
+/* Tombol Reverse */
+.btn-reverse {
+  background: #fd79a8;
+  color: white;
+}
+.btn-reverse:hover {
+  background: #e84393;
+  transform: translateY(-2px);
+}
+
+/* Tombol dark/light mode (kanan atas header) */
 .btn-toggle-theme {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  max-width: 40px;
+  max-height: 40px;
   border-radius: 50%;
   border: none;
   background: #ededed;
@@ -129,14 +337,17 @@ button {
   font-size: 1.3em;
   box-shadow: 0 1px 4px rgba(60, 60, 60, 0.08);
   cursor: pointer;
+  padding: 0;
+  margin-left: 24px;
+  margin-top: 0;
   transition: background 0.2s;
-  margin-left: auto;
+  overflow: hidden;
 }
-
 .btn-toggle-theme:hover {
   background: #d4d4d4;
 }
 
+/* ===================== OUTPUT & INFO ===================== */
 .result-section {
   background: #f8f9fa;
   border-radius: 15px;
@@ -145,6 +356,7 @@ button {
   border-left: 5px solid #667eea;
 }
 
+/* Panel detail langkah kalkulasi */
 .calculation-display {
   background: #fff;
   border-radius: 10px;
@@ -152,7 +364,6 @@ button {
   margin-top: 20px;
   border: 1px solid #e1e5e9;
 }
-
 .calculation-title {
   color: #667eea;
   font-weight: 600;
@@ -160,6 +371,7 @@ button {
   font-size: 1.1em;
 }
 
+/* Rumus perhitungan */
 .formula {
   color: #555;
   font-family: "Courier New", monospace;
@@ -171,6 +383,7 @@ button {
   margin: 5px 0;
 }
 
+/* Panel info rumus konversi */
 .conversion-info {
   background: #e3f2fd;
   border-radius: 10px;
@@ -184,13 +397,13 @@ button {
   margin-bottom: 10px;
   font-size: 1.2em;
 }
-
 .conversion-info p {
   color: #555;
   line-height: 1.5;
   margin-bottom: 8px;
 }
 
+/* Info mode konversi aktif */
 .mode-indicator {
   text-align: center;
   margin-bottom: 20px;
@@ -202,98 +415,7 @@ button {
   transition: background 0.3s;
 }
 
-/* DARK MODE */
-body.dark-mode {
-  background: #23272f;
-}
-
-body.dark-mode .container {
-  background: #2d3142;
-  color: #f8f8f8;
-}
-
-body.dark-mode h1,
-body.dark-mode .subtitle,
-body.dark-mode label,
-body.dark-mode .conversion-info p,
-body.dark-mode .calculation-title,
-body.dark-mode .conversion-info h3 {
-  color: #f8f8f8;
-}
-
-body.dark-mode input[type="number"] {
-  background: #23272f;
-  color: #f8f8f8;
-  border-color: #44495e;
-}
-
-body.dark-mode input[type="number"]:focus {
-  background: #2d3142;
-  border-color: #a3bffa;
-}
-
-body.dark-mode .btn-convert {
-  background: #4e54c8;
-  color: #fff;
-}
-
-body.dark-mode .btn-reset {
-  background: #ffeaa7;
-  color: #23272f;
-}
-
-body.dark-mode .btn-reverse {
-  background: #fd79a8;
-  color: #fff;
-}
-
-body.dark-mode .btn-toggle-theme {
-  background: #2d3142;
-  color: #f7f7f7;
-}
-
-body.dark-mode .btn-toggle-theme:hover {
-  background: #4a4e69;
-}
-
-body.dark-mode .result-section {
-  background: #44495e;
-  border-left: 5px solid #4e54c8;
-}
-
-body.dark-mode .calculation-display {
-  background: #23272f;
-  border: 1px solid #44495e;
-}
-
-body.dark-mode .formula {
-  background: #44495e;
-  color: #f8f8f8;
-}
-
-body.dark-mode .conversion-info {
-  background: #313552;
-}
-
-body.dark-mode .mode-indicator {
-  background: #4e54c8;
-  color: #fff;
-}
-
-@media (max-width: 600px) {
-  .container {
-    padding: 25px;
-  }
-
-  h1 {
-    font-size: 1.8em;
-  }
-
-  .button-group {
-    flex-direction: column;
-  }
-}
-
+/* Footer aplikasi */
 .app-footer {
   text-align: center;
   color: #888;
@@ -306,33 +428,9 @@ body.dark-mode .mode-indicator {
   color: #303756;
   letter-spacing: 1px;
 }
-body.dark-mode .app-footer {
-  color: #bbb;
-}
-body.dark-mode .wm {
-  color: #425a8b;
-}
 
-.app-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1em;
-  margin-bottom: 1.5em;
-}
-.app-header h1 {
-  font-size: 1.5em;
-  color: #333;
-}
-
-body,
-.app-header,
-.app-footer,
-.btn-toggle-theme {
-  transition: background 0.4s, color 0.4s;
-}
-
-/* Error box style */
+/* ===================== ERROR BOX ===================== */
+/* Kotak pesan error di bawah layar */
 .error-box {
   display: none;
   position: fixed;
@@ -350,13 +448,194 @@ body,
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
-
 .error-box.show {
   display: block;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
-.error-box.hide {
-  opacity: 0;
-  transform: translateX(-50%) translateY(20px);
+
+/* ===================== DARK MODE ===================== */
+body.dark-mode {
+  background: #23272f;
+}
+body.dark-mode .container {
+  background: #2d3142;
+  color: #f8f8f8;
+}
+body.dark-mode .history-panel {
+  background: #2d3142;
+  border-right-color: #44495e;
+}
+body.dark-mode .history-header {
+  background: #4e54c8;
+}
+body.dark-mode .history-item {
+  background: #44495e;
+  border-color: #5a6170;
+  color: #f8f8f8;
+}
+body.dark-mode .history-item:hover {
+  background: #313552;
+  border-color: #4e54c8;
+}
+body.dark-mode .history-conversion {
+  color: #f8f8f8;
+}
+body.dark-mode .history-time {
+  color: #bbb;
+}
+body.dark-mode .history-details {
+  color: #ddd;
+}
+body.dark-mode .history-formula {
+  background: #23272f;
+  color: #a3bffa;
+  border-left-color: #4e54c8;
+}
+body.dark-mode .no-history {
+  color: #bbb;
+}
+body.dark-mode .no-history small {
+  color: #888;
+}
+body.dark-mode h1,
+body.dark-mode .subtitle,
+body.dark-mode label,
+body.dark-mode .conversion-info p,
+body.dark-mode .calculation-title,
+body.dark-mode .conversion-info h3 {
+  color: #f8f8f8;
+}
+body.dark-mode input[type="number"] {
+  background: #23272f;
+  color: #f8f8f8;
+  border-color: #44495e;
+}
+body.dark-mode input[type="number"]:focus {
+  background: #2d3142;
+  border-color: #a3bffa;
+}
+body.dark-mode .btn-convert {
+  background: #4e54c8;
+  color: #fff;
+}
+body.dark-mode .btn-convert:hover {
+  background: #434ac0;
+}
+body.dark-mode .btn-reset {
+  background: #ffeaa7;
+  color: #23272f;
+}
+body.dark-mode .btn-reverse {
+  background: #fd79a8;
+  color: #fff;
+}
+body.dark-mode .btn-toggle-theme {
+  background: #2d3142;
+  color: #f7f7f7;
+}
+body.dark-mode .btn-toggle-theme:hover {
+  background: #4a4e69;
+}
+body.dark-mode .result-section {
+  background: #44495e;
+  border-left: 5px solid #4e54c8;
+}
+body.dark-mode .calculation-display {
+  background: #23272f;
+  border: 1px solid #44495e;
+}
+body.dark-mode .formula {
+  background: #44495e;
+  color: #f8f8f8;
+}
+body.dark-mode .conversion-info {
+  background: #313552;
+}
+body.dark-mode .mode-indicator {
+  background: #4e54c8;
+  color: #fff;
+}
+body.dark-mode .app-footer {
+  color: #bbb;
+}
+body.dark-mode .wm {
+  color: #425a8b;
+}
+
+/* ===================== RESPONSIVE DESIGN ===================== */
+@media (max-width: 768px) {
+  .history-panel {
+    width: 280px;
+    left: -280px;
+  }
+  .history-panel.active ~ .container {
+    margin-left: 0;
+    transform: translateX(280px);
+  }
+  .toggle-history-btn.active {
+    left: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+    margin: 10px;
+  }
+  h1 {
+    font-size: 1.8em;
+  }
+  .button-group {
+    flex-direction: column;
+  }
+  .history-panel {
+    width: 100%;
+    left: -100%;
+  }
+  .history-panel.active ~ .container {
+    display: none;
+  }
+  .toggle-history-btn.active {
+    left: 20px;
+  }
+}
+
+/* ===================== FIX ICON TEMA DI TENGAH ===================== */
+#themeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.3em;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+  pointer-events: none;
+}
+
+/* Agar judul & subtitle tetap center walau pakai flex */
+header > div {
+  flex: 1;
+  min-width: 0;
+}
+h1,
+.subtitle {
+  text-align: center;
+}
+
+/* Responsive: tombol tema bulat di hp */
+@media (max-width: 600px) {
+  .btn-toggle-theme {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+    max-width: 36px;
+    max-height: 36px;
+    font-size: 1.3em;
+    margin-left: 12px;
+  }
 }

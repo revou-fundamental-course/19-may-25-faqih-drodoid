@@ -4,75 +4,137 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kalkulator Suhu</title>
+
+    <!-- Link ke file CSS -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <main class="container">
-      <header>
-        <h1>Kalkulator Suhu</h1>
-        <p class="subtitle">Konversi suhu dengan mudah dan akurat</p>
-        <button
-          id="toggleThemeBtn"
-          class="btn-toggle-theme"
-          type="button"
-          aria-label="Ganti Dark/Light Mode"
-        >
-          <span id="themeIcon">🌙</span>
-        </button>
-      </header>
-
-      <section class="mode-indicator" id="modeIndicator">
-        Mode: Celsius ke Fahrenheit
-      </section>
-      <form onsubmit="convertTemperature(); return false;">
-        <div class="input-group">
-          <label for="inputTemp" id="inputLabel">Celsius (°C):</label>
-          <input
-            type="number"
-            id="inputTemp"
-            placeholder="Masukkan suhu..."
-            step="0.01"
-          />
-        </div>
-
-        <div class="button-group">
-          <button class="btn-convert" type="submit">Konversi</button>
-          <button class="btn-reset" type="button" onclick="resetCalculator()">
-            Reset
-          </button>
-          <button class="btn-reverse" type="button" onclick="reverseMode()">
-            Reverse
+    <div class="app-wrapper">
+      <!-- ===== HISTORY PANEL (Panel Riwayat) ===== -->
+      <aside class="history-panel" id="historyPanel">
+        <div class="history-header">
+          <h3>📜 Riwayat Konversi</h3>
+          <!-- Tombol untuk hapus seluruh riwayat konversi -->
+          <button
+            class="clear-history-btn"
+            onclick="clearHistory()"
+            title="Hapus Semua Riwayat"
+          >
+            🗑️
           </button>
         </div>
-
-        <div id="errorMessage" class="error-box"></div>
-      </form>
-
-      <section class="result-section">
-        <div class="input-group">
-          <label for="outputTemp" id="outputLabel">Fahrenheit (°F):</label>
-          <input type="number" id="outputTemp" readonly />
+        <div class="history-list" id="historyList">
+          <!-- Pesan jika belum ada riwayat -->
+          <div class="no-history">
+            <p>Belum ada riwayat konversi</p>
+            <small>Mulai konversi untuk melihat riwayat</small>
+          </div>
         </div>
-      </section>
-
-      <article class="calculation-display" id="calculationDisplay">
-        <div class="calculation-title">Cara Kalkulasi:</div>
-        <div id="calculationSteps"></div>
-      </article>
-
-      <aside class="conversion-info">
-        <h3 id="conversionTitle">
-          Rumus Konversi Dari Celsius (°C) ke Fahrenheit (°F)
-        </h3>
-        <p id="conversionFormula">°F = (°C × 9/5) + 32</p>
-        <p id="conversionExample">Contoh: 0°C = (0 × 9/5) + 32 = 32°F</p>
       </aside>
 
-      <footer class="app-footer">
-        <span class="wm">©Nur Faqih Muhandis</span>
-      </footer>
-    </main>
+      <!-- ===== TOGGLE HISTORY BUTTON (Tombol buka/tutup panel riwayat) ===== -->
+      <button
+        class="toggle-history-btn"
+        id="toggleHistoryBtn"
+        onclick="toggleHistory()"
+      >
+        📜
+      </button>
 
+      <!-- ===== MAIN CALCULATOR (Kalkulator utama) ===== -->
+      <main class="container">
+        <header>
+          <div>
+            <!-- Judul aplikasi -->
+            <h1>Kalkulator Suhu</h1>
+            <!-- Subtitle/deskripsi singkat -->
+            <p class="subtitle">Konversi suhu dengan mudah dan akurat</p>
+          </div>
+
+          <!-- Tombol untuk switch dark/light mode -->
+          <button
+            id="toggleThemeBtn"
+            class="btn-toggle-theme"
+            type="button"
+            aria-label="Ganti Dark/Light Mode"
+          >
+            <!-- Icon tema: bulan/matahari -->
+            <span id="themeIcon">🌙</span>
+          </button>
+        </header>
+
+        <!-- Menampilkan mode konversi yang lagi aktif -->
+        <section class="mode-indicator" id="modeIndicator">
+          Mode: Celsius ke Fahrenheit
+        </section>
+
+        <!-- ===== FORM KONVERSI SUHU ===== -->
+        <form onsubmit="convertTemperature(); return false;">
+          <div class="input-group">
+            <!-- Label input suhu -->
+            <label for="inputTemp" id="inputLabel">Celsius (°C):</label>
+            <!-- Input untuk memasukkan nilai suhu -->
+            <input
+              type="number"
+              id="inputTemp"
+              placeholder="Masukkan suhu..."
+              step="0.01"
+            />
+          </div>
+
+          <!-- Tombol aksi -->
+          <div class="button-group">
+            <button class="btn-convert" type="submit">Konversi</button>
+            <button class="btn-reset" type="button" onclick="resetCalculator()">
+              Reset
+            </button>
+            <button class="btn-reverse" type="button" onclick="reverseMode()">
+              Reverse
+            </button>
+          </div>
+
+          <!-- Tempat pesan error ditampilkan -->
+          <div id="errorMessage" class="error-box"></div>
+        </form>
+
+        <!-- ===== OUTPUT/HASIL KONVERSI ===== -->
+        <section class="result-section">
+          <div class="input-group">
+            <!-- Label output/hasil suhu -->
+            <label for="outputTemp" id="outputLabel">Fahrenheit (°F):</label>
+            <!-- Output hasil konversi, cuma bisa dibaca -->
+            <input type="number" id="outputTemp" readonly />
+          </div>
+        </section>
+
+        <!-- ===== CALCULATION DISPLAY (Menampilkan cara kalkulasi) ===== -->
+        <article class="calculation-display" id="calculationDisplay">
+          <div class="calculation-title">Cara Kalkulasi:</div>
+          <div id="calculationSteps">
+            <!-- Pesan jika belum ada kalkulasi -->
+            <p style="color: #999; font-style: italic">
+              Masukkan nilai suhu lalu klik "Konversi" untuk melihat perhitungan
+            </p>
+          </div>
+        </article>
+
+        <!-- ===== INFO RUMUS KONVERSI ===== -->
+        <aside class="conversion-info">
+          <h3 id="conversionTitle">
+            Rumus Konversi Dari Celsius (°C) ke Fahrenheit (°F)
+          </h3>
+          <p id="conversionFormula">°F = (°C × 9/5) + 32</p>
+          <p id="conversionExample">Contoh: 0°C = (0 × 9/5) + 32 = 32°F</p>
+        </aside>
+
+        <!-- ===== FOOTER ===== -->
+        <footer class="app-footer">
+          <span class="wm">©Nur Faqih Muhandis</span>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Link ke file JavaScript -->
     <script src="js/script.js"></script>
   </body>
 </html>
