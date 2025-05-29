@@ -24,7 +24,7 @@ Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan
 
 ## Tampilan
 
-![Tampilan Kalkulator Suhu](preview.png)
+![Screenshot Tampilan Kalkulator](https://github.com/user-attachments/assets/c9e0cdb7-c09a-4e5a-b047-c1549900e784)
 
 ## Author
 
