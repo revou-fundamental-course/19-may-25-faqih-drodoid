@@ -1,6 +1,6 @@
 # Kalkulator Suhu
 
-Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan tampilan modern serta dukungan dark mode & light mode.
+Aplikasi web sederhana untuk konversi suhu antara Celsius dan Fahrenheit, dengan tampilan simpel serta dukungan dark mode & light mode.
 
 ## Fitur
 
